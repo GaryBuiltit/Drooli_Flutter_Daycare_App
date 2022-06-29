@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "981663899415",
+    "project_id": "drooli-cla",
+    "storage_bucket": "drooli-cla.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981663899415:android:b11cfcdf5384d06a176152",
+        "android_client_info": {
+          "package_name": "com.example.cla_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981663899415-jcd2ttv0pqokodif34so6hr8d1snt5d4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6FaBZZzQZkdUUY3S7q47fsxK1KPBk27I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981663899415-jcd2ttv0pqokodif34so6hr8d1snt5d4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
