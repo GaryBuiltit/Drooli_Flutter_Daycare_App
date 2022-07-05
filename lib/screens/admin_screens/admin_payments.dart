@@ -15,21 +15,16 @@ class AdminPaymentsScreen extends StatefulWidget {
 
 class _AdminPaymentsScreenState extends State<AdminPaymentsScreen> {
   String url =
-      "https://8m97dk409d.execute-api.us-east-1.amazonaws.com/default/stripepaymentsheet";
+      "https://tpu0e4e1o1.execute-api.us-east-1.amazonaws.com/stripepaymentsheet";
 
   _getPaymentSheet() async {
     try {
       var response = await http.post(Uri.parse(url));
       var jsonResponse = await jsonDecode(response.body);
-      // print(jsonResponse['publishablekey']);
       return jsonResponse;
     } catch (e) {
-      print(e);
+      throw('Stripe error: $e');
     }
-
-    // print(response.statusCode);
-
-    // return response.body;
   }
 
   Future<void> initPaymentSheet() async {
@@ -52,7 +47,7 @@ class _AdminPaymentsScreenState extends State<AdminPaymentsScreen> {
           testEnv: true,
           applePay: true,
           googlePay: true,
-          style: ThemeMode.dark,
+          style: ThemeMode.system,
           merchantCountryCode: 'DE',
         ),
       );
