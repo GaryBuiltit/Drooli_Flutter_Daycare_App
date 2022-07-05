@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:cla_app/topbar.dart';
 import 'package:flutter/material.dart';
-import 'package:cla_app/payment_card.dart';
-import 'package:sizer/sizer.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_stripe/flutter_stripe.dart';
+// import 'package:flutter_stripe/flutter_stripe.dart';
 
 class AdminPaymentsScreen extends StatefulWidget {
   const AdminPaymentsScreen({Key? key}) : super(key: key);
@@ -11,14 +14,69 @@ class AdminPaymentsScreen extends StatefulWidget {
 }
 
 class _AdminPaymentsScreenState extends State<AdminPaymentsScreen> {
+  String url =
+      "https://8m97dk409d.execute-api.us-east-1.amazonaws.com/default/stripepaymentsheet";
+
+  _getPaymentSheet() async {
+    try {
+      var response = await http.post(Uri.parse(url));
+      var jsonResponse = await jsonDecode(response.body);
+      // print(jsonResponse['publishablekey']);
+      return jsonResponse;
+    } catch (e) {
+      print(e);
+    }
+
+    // print(response.statusCode);
+
+    // return response.body;
+  }
+
+  Future<void> initPaymentSheet() async {
+    try {
+      // 1. create payment intent on the server
+      final data = await _getPaymentSheet();
+
+      // 2. initialize the payment sheet
+      await Stripe.instance.initPaymentSheet(
+        paymentSheetParameters: SetupPaymentSheetParameters(
+          // Enable custom flow
+          customFlow: true,
+          // Main params
+          merchantDisplayName: 'Flutter Stripe Store Demo',
+          paymentIntentClientSecret: data['paymentIntent'],
+          // Customer keys
+          customerEphemeralKeySecret: data['ephemeralKey'],
+          customerId: data['customer'],
+          // Extra options
+          testEnv: true,
+          applePay: true,
+          googlePay: true,
+          style: ThemeMode.dark,
+          merchantCountryCode: 'DE',
+        ),
+      );
+      // setState(() {
+      //   _ready = true;
+      // });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+      rethrow;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Topbar().customBar("Payments"),
-      body: Center(
-        child: Column(
-          children: [
-            Padding(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Button To take payments
+          Center(
+            child: Padding(
               padding: const EdgeInsets.only(top: 25, bottom: 15),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -26,42 +84,42 @@ class _AdminPaymentsScreenState extends State<AdminPaymentsScreen> {
                   primary: Colors.blue[800],
                   shape: const StadiumBorder(side: BorderSide.none),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  initPaymentSheet();
+                  // _getPaymentSheet();
+                },
                 child: const Text(
-                  "Make A Payment",
+                  "Take A Payment",
                   style: TextStyle(
                     fontSize: 18,
                   ),
                 ),
               ),
             ),
-            Text(
-              "Payment History",
-              style: TextStyle(color: Colors.black, fontSize: 17.sp),
+          ),
+          // Button to see payment history
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 25, bottom: 15),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(200, 50),
+                  primary: Colors.blue[800],
+                  shape: const StadiumBorder(side: BorderSide.none),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, "/adminpayhist");
+                },
+                child: const Text(
+                  "Payment History",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            PaymentCard(
-              paymentAmount: "195.00",
-              paymentPurpose: "Tuition",
-              paymentDate: "4/8/2022",
-              paymentType: "Card",
-            ),
-            PaymentCard(
-              paymentAmount: "195.00",
-              paymentPurpose: "Tuition",
-              paymentDate: "4/15/2022",
-              paymentType: "Card",
-            ),
-            PaymentCard(
-              paymentAmount: "195.00",
-              paymentPurpose: "Tuition",
-              paymentDate: "4/22/2022",
-              paymentType: "Card",
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
