@@ -12,13 +12,13 @@ class SocialSignupButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData queryData = MediaQuery.of(context);
+    // MediaQueryData queryData = MediaQuery.of(context);
     return Padding(
       padding: const EdgeInsets.only(right: 40, left: 40, bottom: 15),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           fixedSize: Size(MediaQuery.of(context).size.width, 7.h),
-          primary: Colors.white,
+          backgroundColor: Colors.white,
           shape: const ContinuousRectangleBorder(
             side: BorderSide(
                 width: 2, style: BorderStyle.solid, color: Colors.grey),
@@ -46,7 +46,7 @@ class SocialSignupButton extends StatelessWidget {
               padding: const EdgeInsets.only(left: 30),
               child: Text(
                 label!,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 13,
                 ),

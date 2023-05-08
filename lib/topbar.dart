@@ -17,17 +17,17 @@ class Topbar {
         fontSize: 20.sp,
       ),
       backgroundColor: Colors.white,
-      toolbarHeight: 15.h,
+      // toolbarHeight: 15.h,
       title: Text(title),
-      actions: [
-        IconButton(
-          padding: EdgeInsets.only(right: 3.w),
-          color: Colors.black,
-          onPressed: () {},
-          iconSize: 35,
-          icon: const Icon(Icons.menu),
-        )
-      ],
+      // actions: [
+      //   IconButton(
+      //     padding: EdgeInsets.only(right: 3.w),
+      //     color: Colors.black,
+      //     onPressed: () {},
+      //     iconSize: 35,
+      //     icon: const Icon(Icons.menu),
+      //   )
+      // ],
     );
   }
 }

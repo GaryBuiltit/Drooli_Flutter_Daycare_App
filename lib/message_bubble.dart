@@ -1,3 +1,5 @@
+// import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
@@ -51,6 +53,7 @@ class MessageBubble extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               child: Text(
                 text,
+                softWrap: true,
                 style: TextStyle(
                   fontSize: 15,
                   color: isMe ? Colors.white : Colors.black,

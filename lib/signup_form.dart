@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
 
 // import 'package:cla_app/screens/pre_login_screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -82,16 +82,15 @@ class SignupForm extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(30.w, 7.h),
-                primary: Colors.blue[800],
+                backgroundColor: Colors.blue[800],
                 shape: const StadiumBorder(side: BorderSide.none),
               ),
               onPressed: () async {
                 try {
-                  final newUser = await _auth.createUserWithEmailAndPassword(
+                  // final newUser =
+                  await _auth.createUserWithEmailAndPassword(
                       email: email, password: password);
-                  if (newUser != null) {
-                    Navigator.pushNamed(context, "login");
-                  }
+                  if (context.mounted) Navigator.pushNamed(context, "/");
                 } catch (e) {
                   // ignore: avoid_print
                   print(e);

@@ -15,10 +15,10 @@ class PaymentCard extends StatelessWidget {
   final String? paymentType;
   final String? paymentPurpose;
 
-  TextStyle labelstyle = TextStyle(
+  final TextStyle labelstyle = TextStyle(
       color: Colors.black, fontSize: 13.sp, fontWeight: FontWeight.bold);
 
-  TextStyle timeStyle = TextStyle(
+  final TextStyle timeStyle = TextStyle(
     color: Colors.grey[500],
     fontSize: 12.sp,
   );

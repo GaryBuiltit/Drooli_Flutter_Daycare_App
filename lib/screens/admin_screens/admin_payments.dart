@@ -23,7 +23,7 @@ class _AdminPaymentsScreenState extends State<AdminPaymentsScreen> {
       var jsonResponse = await jsonDecode(response.body);
       return jsonResponse;
     } catch (e) {
-      throw('Stripe error: $e');
+      throw ('Stripe error: $e');
     }
   }
 
@@ -44,11 +44,15 @@ class _AdminPaymentsScreenState extends State<AdminPaymentsScreen> {
           customerEphemeralKeySecret: data['ephemeralKey'],
           customerId: data['customer'],
           // Extra options
-          testEnv: true,
-          applePay: true,
-          googlePay: true,
+          // testEnv: true,
+          // applePay: true,
+          // googlePay: true,
           style: ThemeMode.system,
-          merchantCountryCode: 'DE',
+          // merchantCountryCode: 'DE',
+          appearance: const PaymentSheetAppearance(
+              colors: PaymentSheetAppearanceColors(
+                  // background: Colors.red,
+                  )),
         ),
       );
       // setState(() {
@@ -66,6 +70,7 @@ class _AdminPaymentsScreenState extends State<AdminPaymentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Topbar().customBar("Payments"),
+      endDrawer: const Drawer(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -76,11 +81,12 @@ class _AdminPaymentsScreenState extends State<AdminPaymentsScreen> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(200, 50),
-                  primary: Colors.blue[800],
+                  backgroundColor: Colors.blue[800],
                   shape: const StadiumBorder(side: BorderSide.none),
                 ),
-                onPressed: () {
-                  initPaymentSheet();
+                onPressed: () async {
+                  await initPaymentSheet();
+                  await Stripe.instance.presentPaymentSheet();
                   // _getPaymentSheet();
                 },
                 child: const Text(
@@ -99,7 +105,7 @@ class _AdminPaymentsScreenState extends State<AdminPaymentsScreen> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(200, 50),
-                  primary: Colors.blue[800],
+                  backgroundColor: Colors.blue[800],
                   shape: const StadiumBorder(side: BorderSide.none),
                 ),
                 onPressed: () {

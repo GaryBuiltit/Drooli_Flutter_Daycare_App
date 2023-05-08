@@ -23,7 +23,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(200, 50),
-                  primary: Colors.blue[800],
+                  backgroundColor: Colors.blue[800],
                   shape: const StadiumBorder(side: BorderSide.none),
                 ),
                 onPressed: () {},
