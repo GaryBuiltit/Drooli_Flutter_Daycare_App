@@ -9,13 +9,13 @@
 
 ## Overview
 
-This is a app built for daycare centers to manage their facilities. There's a parent side to have access to and manage all their child info and records, communicate back and forth with the center and make payments. There is also a admin/center side where they can track enrolled kids, their info, papaerwork and communicate with parents. Center would also be able to acpture and track tuition payments as well.
+This is an app built for daycare centers to manage their facilities. There's a parent side to have access to and manage all their child info and records, communicate back and forth with the center and make payments. There is also a admin/center side where they can track enrolled kids, their info, papaerwork and communicate with parents. Center would also be able to acpture and track tuition payments as well.
 
 ### Screenshot
 
 ![](./assets/images/drooli%20site%20mockup.svg)
 
-### Built with
+## Built with
 
 - [cloud_firestore: ^4.3.1](https://pub.dev/packages/cloud_firestore)
 - [firebase_auth: ^4.2.5](https://pub.dev/packages/firebase_auth)
@@ -28,4 +28,4 @@ This is a app built for daycare centers to manage their facilities. There's a pa
 ## Author
 
 - Website - [Coming Soon]()
-- # Twitter - [@GaryAThe2nd](https://www.twitter.com/GaryAThe2nd)
+- Twitter - [@GaryAThe2nd](https://www.twitter.com/GaryAThe2nd)
